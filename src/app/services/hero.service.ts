@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
 import { HeroesComponent } from '../components/heroes/heroes.component';
 import { Hero } from '../model/hero';
-import { HEROES } from '../model/mock-heroes';
+// import { HEROES } from '../model/mock-heroes';
 import { MessageService } from './message.service';
 
 @Injectable({
