@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 })
 export class HeroDetailComponent implements OnInit {
 
-  myHero?: Hero;
+  hero?: Hero;
 
   constructor(private route: ActivatedRoute, private heroS: HeroService, private location: Location) { }
 
@@ -20,7 +20,7 @@ export class HeroDetailComponent implements OnInit {
     if (heroId) {
       this.heroS.getHero(heroId).subscribe(data => {
         if (data) {
-          this.myHero = data;
+          this.hero = data;
         }
       })
     }
