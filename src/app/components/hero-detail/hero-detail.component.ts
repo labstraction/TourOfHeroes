@@ -12,6 +12,7 @@ import { Location } from '@angular/common';
 export class HeroDetailComponent implements OnInit {
 
   hero?: Hero;
+  isNewHero = false;
 
   constructor(private route: ActivatedRoute, private heroS: HeroService, private location: Location) { }
 
@@ -20,9 +21,13 @@ export class HeroDetailComponent implements OnInit {
     if (heroId) {
       this.heroS.getHero(heroId).subscribe(data => {
         if (data) {
+          this.isNewHero = false;
           this.hero = data;
         }
       })
+    } else {
+      this.isNewHero = true;
+      this.hero =  {id:"", name:"", power:"", alterEgo:""}
     }
   }
 
@@ -32,10 +37,18 @@ export class HeroDetailComponent implements OnInit {
 
   save(): void{
     if (this.hero) {
-      this.heroS.updateHero(this.hero).subscribe(data =>{
-        console.log(data);
-        this.goBack();
-      })
+      if (this.isNewHero) {
+        this.heroS.addHero(this.hero).subscribe(data =>{
+          console.log(data);
+          this.goBack();
+        })
+      } else{
+        this.heroS.updateHero(this.hero).subscribe(data =>{
+          console.log(data);
+          this.goBack();
+        })
+      }
+
     }
   }
 
