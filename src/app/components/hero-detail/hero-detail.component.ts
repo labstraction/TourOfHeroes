@@ -13,6 +13,8 @@ export class HeroDetailComponent implements OnInit {
 
   hero?: Hero;
   isNewHero = false;
+  submitted = false;
+  powers = ["really smart", "super flexible", "super hot", "wether change"]
 
   constructor(private route: ActivatedRoute, private heroS: HeroService, private location: Location) { }
 
@@ -22,17 +24,23 @@ export class HeroDetailComponent implements OnInit {
       this.heroS.getHero(heroId).subscribe(data => {
         if (data) {
           this.isNewHero = false;
+          this.submitted = true;
           this.hero = data;
         }
       })
     } else {
       this.isNewHero = true;
+
       this.hero =  {id:"", name:"", power:"", alterEgo:""}
     }
   }
 
   goBack(): void{
     this.location.back()
+  }
+
+  onSubmit(){
+    this.submitted = true;
   }
 
   save(): void{
